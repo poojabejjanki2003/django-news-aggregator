@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #e63946;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #c1121f;
+        }
+
+        .message {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        #success-message {
+            color: #2e7d32;
+            background-color: #e8f5e9;
+        }
+
+        #error-message {
+            color: #c62828;
+            background-color: #ffebee;
+        }
+
+        #login-button {
+            display: none;
+            background-color: #555;
+        }
+
+        .back {
+            background-color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Register</h2>
+
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter Username">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button type="button" onclick="registerUser()">Register</button>
+
+    <p id="success-message" class="message">
+        Registration successful! Redirecting to Login...
+    </p>
+
+    <p id="error-message" class="message">
+        User already exists!
+    </p>
+
+    <button id="login-button" type="button" onclick="goToLogin()">
+        Go to Login
+    </button>
+
+    <button class="back" type="button" onclick="history.back()">
+        ← Back
+    </button>
+
+</div>
+
+
+<script>
+
+function registerUser() {
+
+    let username = document.getElementById("username").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+
+    if (username === "" || email === "" || password === "") {
+        alert("Please fill all the fields.");
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let existingUser = users.find(function(user) {
+        return user.username.toLowerCase() === username.toLowerCase()
+            || user.email.toLowerCase() === email.toLowerCase();
+    });
+
+    if (existingUser) {
+
+        document.getElementById("error-message").style.display = "block";
+        document.getElementById("success-message").style.display = "none";
+        document.getElementById("login-button").style.display = "block";
+
+        return;
+    }
+
+    users.push({
+        username: username,
+        email: email,
+        password: password
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    document.getElementById("username").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+
+    document.getElementById("error-message").style.display = "none";
+    document.getElementById("login-button").style.display = "none";
+    document.getElementById("success-message").style.display = "block";
+
+    setTimeout(function() {
+        window.location.href = "/news/login.html";
+    }, 1500);
+}
+
+
+function goToLogin() {
+    window.location.href = "/news/login.html";
+}
+
+</script>
+
+</body>
+</html>

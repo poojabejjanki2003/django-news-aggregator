@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #e63946;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #c1121f;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            font-weight: normal;
+        }
+
+        .remember input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            color: #e63946;
+            cursor: pointer;
+        }
+
+        .message {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            color: #2e7d32;
+            background-color: #e8f5e9;
+        }
+
+        #forgot-section {
+            display: none;
+        }
+
+        .back {
+            background-color: #777;
+        }
+
+        .register {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN SECTION -->
+
+    <div id="login-section">
+
+        <h2>Login</h2>
+
+        <label for="uname">Username</label>
+        <input type="text" id="uname" placeholder="Enter Username">
+
+        <label for="psw">Password</label>
+        <input type="password" id="psw" placeholder="Enter Password">
+
+        <button type="button" onclick="loginUser()">
+            Login
+        </button>
+
+        <label class="remember">
+            <input type="checkbox" checked>
+            Remember me
+        </label>
+
+        <span class="forgot" onclick="forgotPassword()">
+            Forgot Password?
+        </span>
+
+        <p id="success-message" class="message">
+            Details are submitted successfully!
+        </p>
+
+        <button class="register" type="button" onclick="goToRegister()">
+            Register
+        </button>
+
+        <button class="back" type="button" onclick="history.back()">
+            ← Back
+        </button>
+
+    </div>
+
+
+    <!-- FORGOT PASSWORD SECTION -->
+
+    <div id="forgot-section">
+
+        <h2>Forgot Password</h2>
+
+        <label for="forgot-username">Username</label>
+        <input type="text" id="forgot-username"
+               placeholder="Enter Username">
+
+        <button type="button" onclick="resetPassword()">
+            Submit
+        </button>
+
+        <p id="forgot-message" class="message">
+            Password reset link has been sent!
+        </p>
+
+        <button class="back" type="button" onclick="showLogin()">
+            ← Back to Login
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function loginUser() {
+
+    let username = document.getElementById("uname").value;
+    let password = document.getElementById("psw").value;
+
+    if (username === "" || password === "") {
+        alert("Please enter username and password.");
+        return;
+    }
+
+    document.getElementById("uname").value = "";
+    document.getElementById("psw").value = "";
+
+    document.getElementById("success-message").style.display = "block";
+}
+
+
+function forgotPassword() {
+
+    document.getElementById("login-section").style.display = "none";
+
+    document.getElementById("forgot-section").style.display = "block";
+
+    document.getElementById("success-message").style.display = "none";
+
+    document.getElementById("forgot-username").value = "";
+
+    document.getElementById("forgot-message").style.display = "none";
+}
+
+
+function resetPassword() {
+
+    let username = document.getElementById("forgot-username").value;
+
+    if (username === "") {
+        alert("Please enter your username.");
+        return;
+    }
+
+    document.getElementById("forgot-username").value = "";
+
+    document.getElementById("forgot-message").style.display = "block";
+}
+
+
+function showLogin() {
+
+    document.getElementById("forgot-section").style.display = "none";
+
+    document.getElementById("login-section").style.display = "block";
+}
+
+
+function goToRegister() {
+
+    window.location.href = "/news/register.html";
+}
+
+</script>
+
+</body>
+</html>

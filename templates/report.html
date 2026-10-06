@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report News</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f4f6f8;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+        }
+
+        .report-container {
+            width: 90%;
+            max-width: 650px;
+            margin: 60px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #e63946;
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #e63946;
+            box-shadow: 0 0 5px rgba(230, 57, 70, 0.2);
+        }
+
+        textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .submit-btn,
+        .close-btn {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn {
+            background: #e63946;
+        }
+
+        .submit-btn:hover {
+            background: #c1121f;
+        }
+
+        .close-btn {
+            background: #777;
+        }
+
+        .close-btn:hover {
+            background: #555;
+        }
+
+        #success-message {
+            display: none;
+            margin-top: 20px;
+            padding: 12px;
+            text-align: center;
+            color: #2e7d32;
+            background: #e8f5e9;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .report-container {
+                width: 95%;
+                padding: 25px;
+                margin: 30px auto;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+        /* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    margin-top: 50px;
+    background: #172033;
+    color: white;
+    padding-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 30px 35px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+}
+
+.footer-section h3 {
+    color: #ff4d5a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.footer-section p {
+    color: #c5cad3;
+    line-height: 1.7;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #c5cad3;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ff4d5a;
+    padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2b3548;
+    color: white;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #ff4d5a;
+    transform: translateY(-4px);
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+    border-top: 1px solid #30394a;
+    text-align: center;
+    padding: 18px 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #aeb5c0;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="report-container">
+
+        <h2>Report the News</h2>
+
+        <p class="subtitle">
+            Help us identify incorrect or inappropriate news.
+        </p>
+
+        <form onsubmit="submitReport(); return false;">
+
+            <label for="news-link">News Link</label>
+
+            <input
+                type="text"
+                id="news-link"
+                placeholder="Paste your news link"
+                required>
+
+            <br><br>
+
+            <label for="reason">Reason</label>
+
+            <textarea
+                id="reason"
+                placeholder="Enter the reason for reporting..."
+                required></textarea>
+
+            <div class="button-group">
+
+                <button type="submit" class="submit-btn">
+                    Submit
+                </button>
+
+                <button
+                    type="button"
+                    class="close-btn"
+                    onclick="history.back()">
+                    Close
+                </button>
+
+            </div>
+
+            <p id="success-message">
+                Your report has been submitted successfully!
+            </p>
+
+        </form>
+
+    </div>
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Onion News Aggregator</h3>
+            <p>
+                Stay updated with the latest news, entertainment,
+                sports, politics and more.
+            </p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+
+            <div class="social-icons">
+
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://twitter.com/" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Onion News Aggregator. All Rights Reserved.</p>
+    </div>
+
+</footer>
+
+    <script>
+
+        function submitReport() {
+
+            document.getElementById("news-link").value = "";
+            document.getElementById("reason").value = "";
+
+            document.getElementById("success-message").style.display = "block";
+        }
+
+    </script>
+
+</body>
+
+</html>

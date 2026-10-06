@@ -1,0 +1,631 @@
+<!-- loading static -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>News Aggregator</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{% static 'css/mystyle.css' %}">
+
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px;
+        background: #eef1f5;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    /* HEADER */
+
+    .jumbotron {
+        width: 100%;
+        height: 300px;
+        position: relative;
+        overflow: visible;
+        border-radius: 20px;
+        background: transparent;
+    }
+
+    .card {
+        width: 100%;
+        height: 400px;
+        border: none;
+        border-radius: 20px;
+        overflow: visible;
+        background: transparent;
+        position: relative;
+        /* border-radius: 10px; */
+    }
+    .card.bg-dark {
+    background-color: transparent !important;
+}
+
+    /* HEADER IMAGE */
+
+    .card-img {
+        width: 100%;
+        height: 400px;
+        object-fit: contain;
+        border-radius: 20px;
+        display: block;
+        border-radius: 10px;
+    }
+
+    /* TEXT ON IMAGE */
+
+    .card-img-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 300px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background: transparent;
+        border-radius: 20px;
+    }
+
+    /* TITLE */
+
+    .card-img-overlay h2 {
+        font-size: 48px;
+        font-weight: 800;
+        /* letter-spacing: 1px; */
+        text-transform: uppercase;
+        margin-bottom: 100px;
+        text-align: center;
+
+        color: rgba(234, 105, 18, 0.971);
+        
+        text-shadow:
+            2px 2px 4px rgb(65, 65, 65),
+            0 0 10px rgba(254, 174, 36, 0.8);
+
+        
+    }
+
+    /* BUTTONS */
+
+    .btn-success {
+        background: #e63946;
+        border: 2px solid white;
+        border-radius: 30px;
+        padding: 10px 28px;
+        margin: 5px;
+        font-weight: bold;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        transition: 0.3s;
+    }
+
+    .btn-success:hover {
+        background: white;
+        color: #e63946;
+        transform: translateY(-3px);
+    }
+
+    /* CATEGORY */
+
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        min-width: 210px;
+        padding: 8px;
+        margin-top: 8px;
+        border: none;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 1055;
+    }
+
+    .dropdown-item {
+        padding: 11px 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .dropdown-item:hover {
+        background: #e63946;
+        color: white;
+    }
+
+    /* THEME BUTTON */
+
+    .btn-warning {
+        background: #f4b942;
+        border: 2px solid white;
+        color: #222;
+        border-radius: 30px;
+        padding: 12px 30px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        transition: 0.3s;
+    }
+
+    .btn-warning:hover {
+        background: #ffd166;
+        transform: translateY(-3px);
+    }
+
+    /* WELCOME IMAGE */
+
+    .row {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .row img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-top: 20px;
+        transition: 0.4s;
+    }
+
+    .row img:hover {
+        transform: scale(1.01);
+    }
+
+    /* DARK MODE */
+
+    .dark-mode {
+        background: #0d1117;
+        color: white;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+
+        body {
+            padding: 15px;
+        }
+
+        .jumbotron,
+        .card,
+        .card-img,
+        .card-img-overlay {
+            height: 280px;
+        }
+
+        .card-img-overlay h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .btn-success,
+        .btn-warning {
+            padding: 8px 18px;
+            font-size: 14px;
+        }
+
+        .row img {
+            height: 350px;
+        }
+    }
+    /* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    margin-top: 50px;
+    background: #172033;
+    color: white;
+    padding-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 30px 35px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+}
+
+.footer-section h3 {
+    color: #ff4d5a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.footer-section p {
+    color: #c5cad3;
+    line-height: 1.7;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #c5cad3;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ff4d5a;
+    padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2b3548;
+    color: white;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #ff4d5a;
+    transform: translateY(-4px);
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+    border-top: 1px solid #30394a;
+    text-align: center;
+    padding: 18px 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #aeb5c0;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    margin-top: 50px;
+    background: #172033;
+    color: white;
+    padding-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 30px 35px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+}
+
+.footer-section h3 {
+    color: #ff4d5a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.footer-section p {
+    color: #c5cad3;
+    line-height: 1.7;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #c5cad3;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ff4d5a;
+    padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2b3548;
+    color: white;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #ff4d5a;
+    transform: translateY(-4px);
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+    border-top: 1px solid #30394a;
+    text-align: center;
+    padding: 18px 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #aeb5c0;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+</style>
+
+</head>
+
+<body>
+   
+
+    <div class="container">
+        <div class="jumbotron">
+            <center>
+                <div class="card bg-dark text-white">
+                    <img src="http://thetvdb.com/banners/_cache/graphical/85342-g.jpg" class="card-img" alt="onion"
+                        height="400px" max-width="100%">
+                    <div class="card-img-overlay">
+                        <h2 class="display-3 ">Onion News Aggregator</h2>
+                        <div class="dropdown hero-buttons">
+                            <a href="{% url 'home' %}" class="btn btn-success">Home</a>
+                          <div class="dropdown">
+
+    <button class="btn btn-success dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+        Category
+    </button>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+        <a class="dropdown-item" href="{% url 'scrape' name='latest' %}">
+            Latest
+        </a>
+
+        <a class="dropdown-item"
+           href="{% url 'scrape' name='entertainment' %}">
+            Entertainment
+        </a>
+
+        <a class="dropdown-item"
+           href="{% url 'scrape' name='sports' %}">
+            Sports
+        </a>
+
+        <a class="dropdown-item"
+           href="{% url 'scrape' name='politics' %}">
+            Politics
+        </a>
+
+        <a class="dropdown-item"
+           href="{% url 'scrape' name='opinion' %}">
+            Opinion
+        </a>
+
+        <a class="dropdown-item"
+           href="{% url 'scrape' name='breaking-news' %}">
+            Breaking News
+        </a>
+
+    </div>
+
+</div>
+
+<button class="btn btn-warning btn-lg btn-block m-4 p-2 theme-button"
+        onclick="themeChange()">
+    Change Theme
+</button>
+            </center>
+        </div>
+
+        <div class="row mt-2 p-2">
+            <!-- Display a image -->
+            <!-- <img src="{% static 'images/welcome.jpg' %}"> -->
+            <img src="{% static 'images/welcome.jpg' %}"
+     alt="welcome"
+     height="500px"
+     width="500px">
+        </div>
+    </div>
+    <footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Onion News Aggregator</h3>
+            <p>
+                Stay updated with the latest news, entertainment,
+                sports, politics and more.
+            </p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+
+            <div class="social-icons">
+
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://twitter.com/" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Onion News Aggregator. All Rights Reserved.</p>
+    </div>
+
+</footer>
+
+    <script>
+        // add a temporary textarea element, set url to it, select from there
+        function copyToClipboard(text) {
+
+            var input = document.createElement("textarea");//create text area
+            input.value = text;//url set as value to textarea
+            document.body.appendChild(input);//add text area to body
+            input.select();//select textarea content
+            document.execCommand("copy");
+            document.body.removeChild(input);
+            alert("Copied to clipboard: " + text);
+        }
+
+        function themeChange() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

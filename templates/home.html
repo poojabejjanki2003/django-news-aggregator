@@ -1,0 +1,929 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>News Aggregator</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome -->
+   
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+      <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f4f6f8;
+            color: #222;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .hero {
+    margin-top: 25px;
+    border-radius: 18px;
+    position: relative;
+    min-height: 260px;
+    overflow: visible;
+}
+
+       .hero-image {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    filter: brightness(45%);
+    border-radius: 18px;
+}
+
+.dropdown-menu {
+    z-index: 1055;
+}
+
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .main-nav {
+            margin-top: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .main-nav .nav-link {
+            color: #333;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .main-nav .nav-link:hover {
+            background: #ee6b6b;
+            color: white;
+        }
+
+        .main-nav .home {
+            background: #ee6b6b;
+            color: white;
+        }
+
+
+        /* =========================
+           INTRODUCTION
+        ========================= */
+
+        .intro-section {
+            margin-top: 30px;
+            padding: 30px;
+
+            background: white;
+            border-radius: 15px;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .intro-section h3 {
+            color: #4f2f42;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .check-title {
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #8b4513;
+        }
+
+
+        /* =========================
+           NEWS CARDS
+        ========================= */
+
+        .news-card {
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+
+            background: white;
+
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
+
+            transition: transform 0.3s,
+                        box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .news-card .card-body {
+            padding: 18px;
+            background: white;
+        }
+
+        .news-card .card-title {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .news-card .card-title a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .news-card .card-title a:hover {
+            color: #ee6b6b;
+        }
+
+        .news-card .card-footer {
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 15px;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn {
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-custom {
+            background: #ee6b6b;
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background: #d95555;
+            color: white;
+        }
+
+        .theme-button {
+            margin-top: 15px;
+            padding: 10px 25px;
+        }
+
+
+        /* =========================
+           SOCIAL MEDIA
+        ========================= */
+
+  .card-footer .d-flex {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+
+.social-buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+.news-social {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.news-social:hover {
+    color: white;
+    opacity: 0.85;
+    transform: scale(1.1);
+}
+
+.news-social.facebook {
+    background: #1877f2;
+}
+
+.news-social.whatsapp {
+    background: #25d366;
+}
+
+.news-social.telegram {
+    background: #229ed9;
+}
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 40px;
+            padding: 25px;
+
+            background: white;
+            border-radius: 12px;
+
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        .dark-mode {
+            background: #121212;
+            color: white;
+        }
+
+        .dark-mode .main-nav,
+        .dark-mode .intro-section,
+        .dark-mode .news-card,
+        .dark-mode .news-card .card-body,
+        .dark-mode .news-card .card-footer,
+        .dark-mode footer {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        .dark-mode .intro-section p {
+            color: #ddd;
+        }
+
+        .dark-mode .news-card .card-title a {
+            color: white;
+        }
+
+        .dark-mode .main-nav .nav-link {
+            color: white;
+        }
+
+        .dark-mode .main-nav .nav-link:hover {
+            background: #ee6b6b;
+            color: white;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            .hero-title {
+                font-size: 30px;
+            }
+
+            .hero {
+                min-height: 220px;
+            }
+
+            .hero-image {
+                height: 220px;
+            }
+
+            .intro-section {
+                padding: 20px;
+            }
+
+            .main-nav {
+                justify-content: center;
+            }
+
+        }
+        /* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    margin-top: 50px;
+    background: #172033;
+    color: white;
+    padding-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 30px 35px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+}
+
+.footer-section h3 {
+    color: #ff4d5a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.footer-section p {
+    color: #c5cad3;
+    line-height: 1.7;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #c5cad3;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ff4d5a;
+    padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2b3548;
+    color: white;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #ff4d5a;
+    transform: translateY(-4px);
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+    border-top: 1px solid #30394a;
+    text-align: center;
+    padding: 18px 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #aeb5c0;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+.no-news {
+    text-align: center;
+    background: white;
+    border-radius: 18px;
+    padding: 60px 20px;
+    margin-top: 20px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
+}
+
+.oops-icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #ffe5e5;
+    color: #ee6b6b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.no-news h2 {
+    color: #ee6b6b;
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.no-news h4 {
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.no-news p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <div class="hero">
+
+        <img
+            src="http://thetvdb.com/banners/_cache/graphical/85342-g.jpg"
+            class="hero-image"
+            alt="Onion News">
+
+        <div class="hero-content">
+
+            <div class="hero-title">
+                Onion News Aggregator
+            </div>
+
+
+            <!-- Category Dropdown -->
+
+            <div class="dropdown">
+
+                <button
+                    class="btn btn-primary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+
+                    Category
+
+                </button>
+
+                <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{% url 'scrape' name='latest' %}">
+                            Latest
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{% url 'scrape' name='entertainment' %}">
+                            Entertainment
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{% url 'scrape' name='sports' %}">
+                            Sports
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{% url 'scrape' name='politics' %}">
+                            Politics
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{% url 'scrape' name='opinion' %}">
+                            Opinion
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{% url 'scrape' name='breaking-news' %}">
+                            Breaking News
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Theme Button -->
+
+            <button
+                class="btn btn-success theme-button"
+                onclick="themeChange()">
+
+                Change Theme
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <ul class="nav nav-pills main-nav justify-content-center">
+
+        <li class="nav-item">
+        <a class="nav-link home" href="{% url 'home' %}">
+            Home
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">
+            About
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}">
+            Contact
+        </a>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">
+            Register
+        </a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">
+            Login
+        </a>
+    </li>
+
+    </ul>
+
+
+    <!-- =========================
+         INTRODUCTION
+    ========================= -->
+
+    <div class="intro-section">
+
+        <h3>
+            News Aggregator
+        </h3>
+
+        <p>
+            News Aggregator can save business time and resources,
+            as they help business owners stay abreast of digital news
+            outlets and breaking news stories.
+        </p>
+
+        <p>
+            This can be very convenient, helping you stay up-to-date
+            with trends, industry developments and the activities of
+            your competitors.
+        </p>
+
+        <p>
+            News Aggregator services also provide update services,
+            whereby a user is regularly updated with the latest news
+            on a chosen topic.
+        </p>
+
+        <div class="check-title">
+            Check These Out:
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         NEWS SECTION
+    ========================= -->
+
+    <div class="row mt-4">
+
+{% if object_list %}
+
+    {% for record in object_list %}
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+
+        <div class="card news-card">
+
+            <!-- News Image -->
+            <img
+                class="news-image"
+                src="{{ record.image }}"
+                alt="News Image">
+
+            <!-- News Title -->
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ record.url }}" target="_blank">
+                        {{ record.title|truncatechars:50 }}
+                    </a>
+                </h5>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <div class="d-flex justify-content-between flex-wrap gap-2">
+
+                    <!-- Copy Button -->
+                    <button
+                        class="btn btn-secondary btn-sm"
+                        onclick="copyToClipboard('{{ record.url }}')">
+                        Copy
+                    </button>
+
+                    <!-- Report -->
+                    <a href="{% url 'report' %}"
+                       class="btn btn-danger btn-sm">
+                        Report
+                    </a>
+
+                    <!-- Social Share -->
+                    <div class="social-buttons">
+
+                        <a class="news-social facebook"
+                           href="https://www.facebook.com/sharer/sharer.php?u={{ record.url }}"
+                           target="_blank"
+                           title="Share on Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a class="news-social whatsapp"
+                           href="https://api.whatsapp.com/send?text={{ record.url }}"
+                           target="_blank"
+                           title="Share on WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+
+                        <a class="news-social telegram"
+                           href="https://t.me/share/url?url={{ record.url }}"
+                           target="_blank"
+                           title="Share on Telegram">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <!-- No News Available -->
+    <div class="col-12">
+
+        <div class="no-news">
+
+            <div class="oops-icon">
+                <i class="fa-solid fa-newspaper"></i>
+            </div>
+
+            <h2>Oops!</h2>
+
+            <h4>No News Found</h4>
+
+            <p>
+                Sorry, there are no news articles available in this category right now.
+            </p>
+
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+{% endif %}
+
+    </div>
+
+
+    <footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Onion News Aggregator</h3>
+            <p>
+                Stay updated with the latest news, entertainment,
+                sports, politics and more.
+            </p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+
+            <div class="social-icons">
+
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://twitter.com/" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Onion News Aggregator. All Rights Reserved.</p>
+    </div>
+
+</footer>
+
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* Copy news URL */
+
+    function copyToClipboard(text) {
+
+        var input = document.createElement("textarea");
+
+        input.value = text;
+
+        document.body.appendChild(input);
+
+        input.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(input);
+
+        alert("Copied to clipboard: " + text);
+    }
+
+
+    /* Change page theme */
+
+    function themeChange() {
+
+        var element = document.body;
+
+        element.classList.toggle("dark-mode");
+
+    }
+
+</script>
+
+
+<!-- Bootstrap JavaScript -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>

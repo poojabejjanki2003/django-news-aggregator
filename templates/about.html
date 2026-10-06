@@ -1,0 +1,760 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Aggregator</title>
+    <link
+      rel="stylesheet"
+      href="C:\Users\shriy\OneDrive\Desktop\hello\newsaggregator\templates\about.html"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+      line-height: 1.7;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Top Image */
+    body > center:first-of-type {
+      background: #111;
+      padding: 20px 0;
+    }
+
+    body > center:first-of-type img {
+      width: 80%;
+      max-width: 700px;
+      height: 125px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    /* About Header */
+    .about-section {
+      padding: 55px 12%;
+      text-align: center;
+      background: linear-gradient(135deg, #1d1d1d, #3b3b3b);
+      color: white;
+    }
+
+    .about-section h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .about-section p {
+      max-width: 1000px;
+      margin: auto;
+      font-size: 17px;
+      text-align: justify;
+    }
+
+    /* Section Titles */
+    body > h2,
+    .about h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 45px 0 25px;
+      color: #222;
+    }
+
+    /* Team Row */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .column {
+      flex: 1 1 33.33%;
+      padding: 12px;
+    }
+
+    /* Team Cards */
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card > img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card .container {
+      padding: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 5px;
+      font-size: 25px;
+      color: #222;
+    }
+
+    .title {
+      color: #e63946;
+      font-weight: bold;
+      font-size: 17px;
+      margin: 5px 0;
+    }
+
+    .card p {
+      margin: 8px 0;
+    }
+
+    /* Contact Button */
+    .button {
+      border: none;
+      outline: none;
+      display: inline-block;
+      padding: 11px 20px;
+      color: white;
+      background-color: #e63946;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background-color: #b71c1c;
+      transform: translateY(-2px);
+    }
+
+    /* FAQ / Main Content */
+    .about {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px 40px 50px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .about h2 {
+      color: #222;
+      border-bottom: 3px solid #e63946;
+      padding-bottom: 10px;
+    }
+
+    .about h3 {
+      color: #e63946;
+      font-size: 21px;
+      margin-top: 30px;
+      margin-bottom: 8px;
+    }
+
+    .about p {
+      font-size: 16px;
+      color: #444;
+    }
+
+    /* FAQ Images */
+    .about img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Social Media */
+
+    .about ul {
+      display: inline-block;
+      /* text-align: left; */
+      padding-left: 30px;
+    }
+
+    .about li {
+      margin: 8px 0;
+      font-size: 17px;
+    }
+
+    /* Footer */
+    .socialmediaicons {
+      background: #111;
+      padding: 10px 0;
+      margin-top: 30px;
+    }
+
+    .socialmediaicons footer {
+      margin: 0 !important;
+    }
+
+    .socialmediaicons p {
+      color: #aaa !important;
+      margin: 10px;
+    }
+
+    .socialmediaicons a {
+      color: #e63946;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    .socialmediaicons a:hover {
+      color: white;
+    }
+
+    /* Facebook Icon */
+    .fa {
+      padding: 10px;
+      font-size: 20px;
+      width: 42px;
+      height: 42px;
+      text-align: center;
+      text-decoration: none;
+      margin: 5px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .fa-facebook {
+      background: #3b5998;
+      color: white !important;
+    }
+
+    .fa-facebook:hover {
+      opacity: 0.8;
+    }
+
+    /* Mobile */
+    @media screen and (max-width: 768px) {
+      body > center:first-of-type img {
+        width: 90%;
+        height: 100px;
+      }
+
+      .about-section {
+        padding: 40px 20px;
+      }
+
+      .about-section h1 {
+        font-size: 34px;
+      }
+
+      .about-section p {
+        font-size: 15px;
+        text-align: left;
+      }
+
+      .column {
+        flex: 1 1 100%;
+      }
+
+      .card > img {
+        height: 350px;
+      }
+
+      .about {
+        margin: 20px 10px;
+        padding: 20px;
+      }
+
+      .about h2,
+      body > h2 {
+        font-size: 26px;
+      }
+
+      .about h3 {
+        font-size: 19px;
+      }
+    }
+    /* Back Button */
+    .back-button {
+      display: inline-block;
+      background: #e63946;
+      color: white;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: bold;
+      margin: 20px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-button:hover {
+      background: #c92f3b;
+      transform: translateY(-2px);
+      color: white;
+    }
+    a {
+      text-decoration: none;
+    }
+    .social-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-links li {
+    margin-bottom: 10px;
+}
+
+.social-links li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.social-links li a:hover {
+    color: #e63946;
+    padding-left: 5px;
+}
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    margin-top: 50px;
+    background: #172033;
+    color: white;
+    padding-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 30px 35px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+}
+
+.footer-section h3 {
+    color: #ff4d5a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.footer-section p {
+    color: #c5cad3;
+    line-height: 1.7;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #c5cad3;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ff4d5a;
+    padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2b3548;
+    color: white;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #ff4d5a;
+    transform: translateY(-4px);
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+    border-top: 1px solid #30394a;
+    text-align: center;
+    padding: 18px 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #aeb5c0;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+  </style>
+  </head>
+  <body>
+    <!-- <a href="about"> About</a>
+    <a href="{% url 'about' %}"></a> -->
+    <button class="back-button" onclick="history.back()">← Back</button>
+
+    <center>
+      <img
+        src="https://tse1.mm.bing.net/th?id=OIP.3-pRrHTOubnP830a0dp-bQAAAA&pid=Api&P=0&h=180"
+        alt="image"
+        class="img-fluid"
+        height="125px"
+        width="60%"
+      />
+    </center>
+    &nbsp;
+    <div class="about-section">
+      <h1>About Us</h1>
+      <p>
+        The Onion is the world’s leading news publication, offering highly
+        acclaimed, universally revered coverage of breaking national,
+        international, and local news events. Rising from its humble beginnings
+        as a print newspaper in 1756, The Onion now enjoys a daily readership of
+        4.3 trillion and has grown into the single most powerful and influential
+        organization in human history. In addition to maintaining a towering
+        standard of excellence to which the rest of the industry aspires, The
+        Onion supports more than 350,000 full- and part-time journalism jobs in
+        its numerous news bureaus and manual labor camps stationed around the
+        world, and members of its editorial board have served with distinction
+        in an advisory capacity for such nations as China, Syria, Somalia, and
+        the former Soviet Union. On top of its journalistic pursuits, The Onion
+        also owns and operates the majority of the world’s transoceanic shipping
+        lanes, stands on the nation’s leading edge on matters of deforestation
+        and strip mining, and proudly conducts tests on millions of animals
+        daily. The Onion is now available exclusively online without charge in
+        order to take advantage of various charity tax benefits.
+      </p>
+    </div>
+
+    <h2 style="text-align: center">Our Team</h2>
+    <div class="row">
+      <div class="column">
+        <div class="card">
+          <img
+            src="{% static 'images/editor.jpg' %}"
+            alt="Editor"
+            width="500"
+            height="500"
+          />
+          <div class="container">
+            <h2>Chad Nackers</h2>
+            <p class="title">Editor</p>
+            <p>Editor in the chief.</p>
+            <p>chad@gmail.com</p>
+            <p>
+              <a href="{% url 'contact' %}" class="button">Contact</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <img
+            src="{% static 'images/jordan.jpg' %}"
+            alt="Jordan"
+            width="500"
+            height="500"
+          />
+          <div class="container">
+            <h2>Jordan LaFlure</h2>
+            <p class="title">Senior Editor</p>
+            <p>Senior Managing Editor.</p>
+            <p>jordan@gmail.com</p>
+            <p>
+              <a href="{% url 'contact' %}" class="button">Contact</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <img
+            src="{% static 'images/claire.jpg' %}"
+            alt="Claire"
+            width="500"
+            height="500"
+          />
+          <div class="container">
+            <h2>Claire Favret</h2>
+            <p class="title">Project Manager</p>
+            <p>Manages the organization.</p>
+            <p>claire@gmail.com</p>
+            <p>
+              <a href="{% url 'contact' %}" class="button">Contact</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about">
+      <h2 style="text-align: center">Frequently Asked Questions</h2>
+      &nbsp;
+      <h3>Can I submit articles or ideas to The Onion?</h3>
+      <p>
+        No, The Onion does not accept outside submissions of any kind. We will
+        not respond to any unsolicited submissions.
+      </p>
+
+      <h3>How can I work for The Onion?</h3>
+      <p>
+        Onion Inc. regularly posts new openings on the Careers section of our
+        website.
+      </p>
+      <p>
+        On the exceedingly rare occasions that there are openings for editorial
+        positions, those opportunities will be posted on our Careers page as
+        well.
+      </p>
+      <p>
+        Please do not send resumes unless specifically told to do so in a job
+        listing.
+      </p>
+      <p>Any unsolicited résumés will be immediately discarded.</p>
+
+      <h3>What if I have feedback on an Onion article?</h3>
+      <p>
+        Please send all concerns to publicfeedback@theonion.com. The Onion
+        cannot guarantee a response to any feedback to its content.
+      </p>
+
+      <h3>How can I bring The Onion to my event?</h3>
+      <p>
+        The writers and editors of America’s Finest News Source and its sister
+        sites are available for speaking engagements at universities,
+        conferences, annual
+      </p>
+      <p>or semi-annual meet-ups for disgraced veterinarians, and festivals.</p>
+      <p>Please send all inquiries to press@g-omedia.com.</p>
+
+      <center>
+        <img
+          src="https://variety.com/wp-content/uploads/2017/01/the-onion-logo.jpg?w=1000"
+          alt="logo"
+          height="300px"
+          width="500px"
+        />
+      </center>
+
+      &nbsp;
+      <h2 style="text-align: center">Where can I find The Onion?</h2>
+      &nbsp;
+      <p>
+        The Onion is an online-only publication and is no longer available in
+        print.
+      </p>
+      <p>
+        Outside of TheOnion.com, you can connect to the most important
+        journalism in human history through the following channels:
+      </p>
+
+      <center><h3>Social Media</h3></center>
+      <ul
+        class="social-links"
+        style="
+          text-align: left;
+          display: flex;
+          justify-content: center;
+          justify-content: space-around;
+          font-weight: 900;
+          color: #444;
+          list-style: none;
+        "
+      >
+        <li>
+          <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/" target="_blank">Twitter</a>
+        </li>
+
+        <li>
+          <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+        </li>
+
+        <li>
+          <a href="https://www.youtube.com/" target="_blank">Youtube</a>
+        </li>
+      </ul>
+
+      <center>
+        <h2>Books</h2>
+        <p>
+          The Onion has released 13 books over its illustrious 250-year
+          publishing history, including four books of original material.
+        </p>
+        <p>All are available for purchase here.</p>
+        <img
+          src="https://i.kinja-img.com/image/upload/c_fit,q_60,w_645/rcd0fjkuizyysxk33nut.jpg"
+          alt="history"
+          height="200px"
+          width="200px"
+        />
+        <p>
+          Our Dumb Century: The Onion Presents 100 Years Of Headlines From
+          America’s Finest News Source (1999)
+        </p>
+        <p>Our Dumb World: The Onion’s Atlas Of The Planet Earth (2007)</p>
+        <img
+          src="https://i.kinja-img.com/image/upload/c_fit,q_60,w_645/lmoawtktdqwrugp8zgei.jpg"
+          alt="book"
+          height="200px"
+          width="200px"
+        />
+        <p>
+          The Onion Book Of Known Knowledge: A Definitive Encyclopaedia Of
+          Existing Information (2012)
+        </p>
+        <img
+          src="https://i.kinja-img.com/image/upload/c_fit,q_60,w_645/avdqzpyt5jr61gkjawwz.jpg"
+          alt="img"
+          height="200px"
+          width="200px"
+        />
+        <p>
+          The Trump Leaks: The Onion Exposes the Top Secret Memos, Emails, and
+          Doodles That Could Take Down a President (2017)
+        </p>
+        <img
+          src="https://i.kinja-img.com/image/upload/c_fit,q_60,w_645/hvbgibiciq8ccttrgow1.jpg"
+          alt="books"
+          height="200px"
+          width="200px"
+        />
+      </center>
+    </div>
+    <center>
+      <div class="socialmediaicons">
+        <footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Onion News Aggregator</h3>
+            <p>
+                Stay updated with the latest news, entertainment,
+                sports, politics and more.
+            </p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+
+            <div class="social-icons">
+
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://twitter.com/" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Onion News Aggregator. All Rights Reserved.</p>
+    </div>
+
+</footer>
+      </div>
+    </center>
+  </body>
+</html>
